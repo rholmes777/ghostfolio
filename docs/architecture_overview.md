@@ -88,4 +88,18 @@ graph TD
   API -- Jobs --> Queue
 ```
 
+### Background Price Update Job
+```mermaid
+sequenceDiagram
+  Scheduler->>Queue: enqueue gather7Days()
+  Queue->>DataProvider: fetch prices
+  Queue->>DB: upsert MarketData
+```
+
+## Architecture Style
+The project uses a layered approach:
+- **Presentation** – Angular client and NestJS controllers.
+- **Domain** – services encapsulating business rules.
+- **Infrastructure** – Prisma data access, Redis cache, Bull queues.
+
 Last verified on 2025-06-22 @ commit 2634a4fd.
